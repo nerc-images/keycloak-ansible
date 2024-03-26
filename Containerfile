@@ -4,8 +4,9 @@ USER root
 
 # Install pip dependencies
 RUN yum install -y python3-pip
-RUN pip install ansible
-RUN ansible-galaxy collection install kubernetes.core community.general -U
+COPY requirements.txt requirements.yaml /tmp/
+RUN pip install -r /tmp/requirements.txt
+RUN ansible-galaxy install -r /tmp/requirements.yaml
 
 ENV \
     GECOS="Keycloak user" \
