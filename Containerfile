@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9:9.3
+FROM registry.access.redhat.com/ubi10:10.0
 
 USER root
 
@@ -8,6 +8,6 @@ ENV HOME=/home/ansible
 RUN yum install -y python3-pip
 COPY requirements.txt requirements.yaml /tmp/
 RUN pip install -r /tmp/requirements.txt
-RUN ansible-galaxy install -r /tmp/requirements.yaml
+RUN ansible-galaxy collection install -r /tmp/requirements.yaml -p /usr/share/ansible/collections --force
 
 WORKDIR $HOME
